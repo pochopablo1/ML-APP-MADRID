@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Corta estancia</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: rgba(231, 231, 220, 0.5);
+            background-image: url("{{url_for("static", filename="img/88019.jpg")}}");
+            background-blend-mode: lighten;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        .home-button {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #49347a;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .home-button:hover {
+            background-color: #342557;
+        }
+        .home-button:active {
+            background-color: #211837;
+        }
+        h1 {
+            padding: 10px;
+            text-align: auto;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%;
+            border-radius: 10px;
+            font-size: 36px;
+            margin-top: 30px;
+            padding: 5px;
+            color: #ffffff;
+
+            /* Cambio aquí: Ahora el gradiente se aplica al fondo del h1 */
+            background: #6146eae2;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #a598e3df
+            ;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #888888;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        select, input[type="number"] {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        input[type="submit"] {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #59c3c3;
+        }
+
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="window.location.href='/'">🏠 Home</button>
+    <div class="container">
+        <h1>CORTA ESTANCIA</h1>
+        <form action="/predecir_corta" method="post">
+        <label for="distrito">Selecciona un distrito:</label>
+        <select name="distrito">
+            {% for distrito, coords in distrito_coords.items() %}
+            <option value="{{ distrito }}" data-latitud="{{ coords.latitud }}" data-longitud="{{ coords.longitud }}">{{ distrito }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="tipo_encoded">Tipo:</label>
+        <select name="tipo_encoded">
+            <option value="0">Habitación Privada</option>
+            <option value="1">Apartamento Entero</option>
+        </select>
+
+        <label for="huespedes">Número de huéspedes:</label>
+        <input type="number" name="huespedes" required min="1" max="16">
+
+        <label for="habitaciones">Número de habitaciones:</label>
+        <input type="number" name="habitaciones" required min="1" max="6">
+
+        <label for="banos">Número de baños:</label>
+        <input type="number" name="banos" required min="0" max="5">
+
+        <!-- <label for "cocina">¿Cocina?</label> -->
+        <label for="cocina">Cocina <input type="checkbox" class="checkbox" name="cocina" value="1"></label>
+        <input type="hidden" name="cocina" value="0">
+        <!-- <input type="radio" name="cocina" value="1">Sí
+        <input type="radio" name="cocina" value="0">No -->
+
+        <label for="ac">AC <input type="checkbox" name="ac" value="1"></label>
+        <input type="hidden" name="ac" value="0">
+        <!-- <label for="ac">¿AC?</label>
+        <input type="radio" name="ac" value="1">Sí
+        <input type="radio" name="ac" value="0">No -->
+
+        <label for="wifi">WiFi<input type="checkbox" name="wifi" value="1"></label>
+        <input type="hidden" name="wifi" value="0">
+        <!-- <label for="wifi">¿Wifi?</label>
+        <input type="radio" name="wifi" value="1">Sí
+        <input type="radio" name="wifi" value="0">No -->
+
+        <label for="calefaccion">Calefacción<input type="checkbox" name="calefaccion" value="1"></label>
+        <input type="hidden" name="calefaccion" value="0">
+        <!-- <label for="calefaccion">¿Calefacción?</label>
+        <input type="radio" name="calefaccion" value="1">Sí
+        <input type="radio" name="calefaccion" value="0">No -->
+
+        <label for="ascensor">Ascensor<input type="checkbox" name="ascensor" value="1"></label>
+        <input type="hidden" name="ascensor" value="0">
+        <!-- <label for="ascensor">¿Ascensor?</label>
+        <input type="radio" name="ascensor" value="1">Sí
+        <input type="radio" name="ascensor" value="0">No -->
+
+        <label for="parking">Parking<input type="checkbox" name="parking" value="1"></label>
+        <input type="hidden" name="parking" value="0">
+        <!-- <label for="parking">¿Parking?</label>
+        <input type="radio" name="parking" value="1">Sí
+        <input type="radio" name="parking" value="0">No -->
+
+        <br> 
+        <input type="submit" value="Predecir">
+
+    </form>
+</body>
+</html>
