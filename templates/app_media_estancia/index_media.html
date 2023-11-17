@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Media estancia</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: rgba(231, 231, 220, 0.5);
+            background-image: url("{{url_for("static", filename="img/88019.jpg")}}");
+            background-blend-mode: lighten;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+        .home-button {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0fb3e6;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .home-button:hover {
+            background-color: #0fb3e6;
+        }
+        .home-button:active {
+            background-color: #0fb3e6;
+        }
+        h1 {
+            padding: 10px;
+            text-align: auto;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%;
+            border-radius: 10px;
+            font-size: 36px;
+            margin-top: 30px;
+            padding: 5px;
+            color: #ffffff;
+
+            /* Cambio aquí: Ahora el gradiente se aplica al fondo del h1 */
+            background: #0fb3e6;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #0fb4e69c;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #888888;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        textarea, select, option {
+            background-color: #ededed;
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        select, input[type="number"] {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        input[type="submit"], input[type="button"] {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover, input[type="button"]:hover {
+            background-color: #073ff7;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="window.location.href='/'">🏠 Home</button>
+    <div class="container">
+        <h1>MEDIA ESTANCIA</h1>
+        <form action="/predecir_media" method="post">
+            <!--AÑADIR DIFERENTES CAMPOS-->
+              
+            <!-- Distrito menu desplegable-->
+            <p>
+                <label for="distrito">Distrito:</label>
+                <select name="distrito">
+                    {% for distrito, coords in distrito_coords.items() %}
+                        <option value="{{ distrito }}" data-latitud="{{ coords.latitud }}" data-longitud="{{ coords.longitud }}">{{ distrito }}</option>
+                    {% endfor %}
+                </select>
+    
+                <!-- Nº habitaciones Entero-->
+                <label for="habitaciones"><b>Habitaciones</b></label>
+                <input type="number" name="habitaciones" id="habitaciones" min="0" max="20" value="2" required>
+        
+    
+                <!-- Nº baños Entero-->     
+                <label for="baños"><b>Baños</b></label>
+                <input type="number"  name="baños" id="baños" min="1" max="10" value="1" required>
+    
+                
+                <!-- Tamaño -->
+                <b>Tamaño m<sup>2</sup>:</b>
+                <input name="tamaño" type="number" min="30" max="600" value="75" required>
+    
+                <!-- Piso/Casa -->    
+                <label for="tipo"><b>Tipo</b></label>
+                <input type="radio" id="piso" name="tipo" checked value="Piso">Piso
+                <input type="radio" id="casa" name="tipo" value="Casa">Casa         
+    
+                <!-- Garaje -->        
+                <label for="garaje"><b>Garaje</b></label>
+                <input type="radio" id="si" name="garaje" checked value="Si">Si
+                <input type="radio" id="no" name="garaje" value="No">No
+    
+                <!-- Piscina -->        
+                <label for="piscina"><b>Piscina</b></label>
+                <input type="radio" id="si" name="piscina" value="Si">Si
+                <input type="radio" id="no" name="piscina" checked value="No">No
+    
+                <!-- Ascensor -->        
+                <label for="ascensor"><b>Ascensor</b></label>
+                <input type="radio" id="si" name="ascensor" checked value="Si">Si
+                <input type="radio" id="no" name="ascensor" value="No">No         
+    
+                <!-- Exterior-->        
+                <label for="exterior"><b>Exterior</b></label>
+                <input type="radio" id="si" name="exterior" checked value="Si">Si
+                <input type="radio" id="no" name="exterior" value="No">No
+                
+                <br><br>
+    
+                <input type="submit" value="Buscar"/>
+                <input type="button" value="Reiniciar" onClick="location.reload();"/>
+                </p>
+    
+    </form>
+    
+</body>
+    
+</html>

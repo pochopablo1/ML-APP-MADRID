@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultado de corta estancia</title>
+    <style>
+
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffffff57;
+            background-image: url("{{url_for('static', filename='img/Desafio (3).jpg')}}");
+            /* background-blend-mode: lighten; */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* justify-content: center; */
+            justify-content: flex-start;
+            height: 100vh;
+
+        }
+        .home-button {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #49347a;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .home-button:hover {
+            background-color: #342557;
+        }
+        .home-button:active {
+            background-color: #211837;
+        }
+        h1 {
+            background: linear-gradient(to right, #6246ea, #59c3c3);
+            color: #ffffff;
+            padding: 10px;
+            margin-top: 80px; /* Reducido para estar más arriba */
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            font-size: 2em; /* Aumentado el tamaño de la fuente */
+        
+        }
+
+        
+        h2 {
+            background-color: rgba(0, 0, 0, 0.658);
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 130px 0 0; /* Ajuste de márgenes */
+            width: 30%;
+            font-size: 2em; /* Aumentado el tamaño de la fuente */
+        }
+
+
+        /* div {
+            background-color: rgba(0, 0, 0, 0.658);
+            color: #ffffff;
+            padding: 10px;
+
+        } */
+        .resultado {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30%;  /* Ajusta esto según necesites */
+            width: 100%;
+        }
+
+
+        p {
+            font-size: 5em; 
+            background-color: rgba(0, 0, 0, 0.658);
+            color: #ffffff;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 0;  /* Elimina los márgenes por defecto */
+        }
+   
+
+    </style>
+</head>
+<body>
+    <button class="home-button" onclick="window.location.href='/'">🏠 Home</button>
+    <h1>STAYMADRID PREDICTOR</h1>
+    <br>
+    <h2>PRECIO ESTIMADO <br>
+        POR NOCHE:</h2>
+    <div class="resultado">
+        <p>€ {{ resulpred|int }}</p>
+        <!-- Puedes mostrar más resultados aquí si es necesario -->
+    </div>
+
+    
+</body>
+</html>
+
+
+
